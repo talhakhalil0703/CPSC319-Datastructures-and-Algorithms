@@ -21,7 +21,7 @@ public class Fibonacci {
     private int memoizationHelper(int n, ArrayList<Integer> memArray) {
         if (n <= 1) {
             return n;
-        } else if (memArray.size() == (n + 1)) {
+        } else if (memArray.size() >= (n+1)) {
             return memArray.get(n);
         } else {
             memArray.add(n, memoizationHelper(n - 1, memArray) + memoizationHelper(n - 2, memArray));
@@ -87,19 +87,110 @@ public class Fibonacci {
         return returnFM;
     }
 
+    public static long [] callRecursive(int n){
+        long [] timeTaken = new long [n];
+        long before;
+        long after;
+
+        for (int i = 0; i < n; i++){
+            before = System.nanoTime();
+            Fibonacci.recursive(i);
+            after = System.nanoTime();
+            timeTaken[i] = after-before;
+        }
+        return timeTaken;
+    }
+
+    public static long [] callMemoization(int n){
+        long [] timeTaken = new long [n];
+        long before;
+        long after;
+
+        for (int i = 0; i < n; i++){
+            before = System.nanoTime();
+            Fibonacci.memoization(i);
+            after = System.nanoTime();
+            timeTaken[i] = after-before;
+        }
+        return timeTaken;
+    }
+
+    public static long [] callDynamic(int n){
+        long [] timeTaken = new long [n];
+        long before;
+        long after;
+
+        for (int i = 0; i < n; i++){
+            before = System.nanoTime();
+            Fibonacci.dynamic(i);
+            after = System.nanoTime();
+            timeTaken[i] = after-before;
+        }
+        return timeTaken;
+    }
+
+    public static long [] callIterator(int n){
+        long [] timeTaken = new long [n];
+        long before;
+        long after;
+
+        for (int i = 0; i < n; i++){
+            before = System.nanoTime();
+            Fibonacci.iterator(i);
+            after = System.nanoTime();
+            timeTaken[i] = after-before;
+        }
+        return timeTaken;
+    }
+
+    public static long [] callMatrix(int n){
+        long [] timeTaken = new long [n];
+        long before;
+        long after;
+
+        for (int i = 0; i < n; i++){
+            before = System.nanoTime();
+            Fibonacci.matrix(i);
+            after = System.nanoTime();
+            timeTaken[i] = after-before;
+        }
+        return timeTaken;
+    }
+
+    public static long [] measureExecutionTime(int howManyTimesToRun, int largestN){
+        long [][] usedForAveraging = new long [howManyTimesToRun][];
+        for (int i =0; i < howManyTimesToRun; i++){
+            usedForAveraging[i] = callRecursive(largestN);
+        }
+
+        for (int i = 0; i < howManyTimesToRun; i++){
+            for (int j = 0; j < largestN; j++){
+
+            }
+            long[0][30]
+        }
+        System.out.printf("Recursive: %d \n", usedForAveraging[0][28]);
+        return usedForAveraging[0];
+    }
 
     public static void main(String[] args) {
+        long before = System.nanoTime();
 
-        int recursive = Fibonacci.recursive(7);
-        int memoization = Fibonacci.memoization(7);
-        int dynamic = Fibonacci.dynamic(7);
-        int iteration = Fibonacci.iterator(7);
-        int matrix = Fibonacci.matrix(7);
-        System.out.printf("Recursive: %d \n", recursive);
-        System.out.printf("Memoization: %d \n", memoization);
-        System.out.printf("Dynamic: %d \n", dynamic);
-        System.out.printf("Iteration: %d \n", iteration);
-        System.out.printf("Matrix: %d \n", matrix);
+        long [] recursiveTimes = measureExecutionTime( 1,30);
+        long [] memoizationTimes = callMemoization(10000);  // 10k
+        System.out.printf("Memoization: %d \n", memoizationTimes[9999]);
+
+        long [] dynamicTimes = callDynamic(50000); // 50k
+        System.out.printf("Dynamic: %d \n", dynamicTimes[49999]);
+
+        long [] iterationTimes = callIterator(50000); //50k
+        System.out.printf("Iteration: %d \n", iterationTimes[49999]);
+
+        long [] matrixTimes = callMatrix(50000); //50k
+        System.out.printf("Matrix: %d \n", matrixTimes[49999]);
+
+        long after = System.nanoTime();
+        System.out.printf("Time Taken Total: %f seconds taken\n", (after-before)/Math.pow(10,9));
     }
 
 }
