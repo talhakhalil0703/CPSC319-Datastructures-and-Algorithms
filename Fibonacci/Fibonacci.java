@@ -60,13 +60,13 @@ public class Fibonacci {
 
         int[][] FM = new int[][]{{1, 1}, {1, 0}};
         Fibonacci power =  new Fibonacci();
-        power.matrixPower(n, FM);
+        FM = power.matrixPower(n-1, FM);
         return FM[0][0];
     }
 
-    private void matrixPower(int n, int [][] FM){
+    private int [][] matrixPower(int n, int [][] FM){
         if (n>1){
-            matrixPower(n/2, FM);
+            FM = matrixPower(n/2, FM);
             Fibonacci multiplication =  new Fibonacci();
             FM = multiplication.matrixMultiplication(FM, FM);
             if (n%2 != 0){
@@ -74,10 +74,11 @@ public class Fibonacci {
                 FM = multiplication.matrixMultiplication(FM, initialFM);
             }
         }
+        return FM;
     }
 
     private int [][] matrixMultiplication(int [][] FM, int [][] uFM){
-        int [][] returnFM = new int [][]{{1, 1}, {1, 0}};;
+        int [][] returnFM = new int [][]{{1, 1}, {1, 0}};
         returnFM [0][0] =  FM [0][0] * uFM [0][0] + FM [0][1] * uFM [1][0];
         returnFM [0][1] =  FM [0][0] * uFM [0][1] + FM [0][1] * uFM [1][1];
         returnFM [1][0] =  FM [1][0] * uFM [0][0] + FM [1][1] * uFM [1][0];
@@ -89,11 +90,11 @@ public class Fibonacci {
 
     public static void main(String[] args) {
 
-        int recursive = Fibonacci.recursive(5);
-        int memoization = Fibonacci.memoization(5);
-        int dynamic = Fibonacci.dynamic(5);
-        int iteration = Fibonacci.iterator(5);
-        int matrix = Fibonacci.matrix(5);
+        int recursive = Fibonacci.recursive(7);
+        int memoization = Fibonacci.memoization(7);
+        int dynamic = Fibonacci.dynamic(7);
+        int iteration = Fibonacci.iterator(7);
+        int matrix = Fibonacci.matrix(7);
         System.out.printf("Recursive: %d \n", recursive);
         System.out.printf("Memoization: %d \n", memoization);
         System.out.printf("Dynamic: %d \n", dynamic);
