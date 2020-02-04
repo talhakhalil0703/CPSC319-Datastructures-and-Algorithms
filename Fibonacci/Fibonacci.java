@@ -1,9 +1,7 @@
-import java.util.ArrayList;
 import java.io.FileWriter;
 
 /**
  * Different alogirithims for the fibonacci sequence used for evaluating there running time
- *
  * @author Talha Khalil
  * @version 1.0
  * @since Feburary 3, 2020
@@ -34,9 +32,13 @@ public class Fibonacci {
      */
 
     public static int memoization(int n) {
-        ArrayList<Integer> previousCallValues = new ArrayList<Integer>();
-        previousCallValues.add(0, 0);
-        previousCallValues.add(1, 1);
+        if (n == 0 || n == 1) {
+            return n;
+        }
+
+        int [] previousCallValues = new int [n+1];
+        previousCallValues[0] = 0;
+        previousCallValues[1] = 1;
         Fibonacci memoizationHelper = new Fibonacci();
         return memoizationHelper.memoizationHelper(n, previousCallValues);
     }
@@ -48,15 +50,14 @@ public class Fibonacci {
      * @param memArray the Array that stores previously calculated values
      * @return returns the fibonacci number corresponding to index n
      */
-    private int memoizationHelper(int n, ArrayList<Integer> memArray) {
+    private int memoizationHelper(int n, int [] memArray) {
         if (n <= 1) {
             return n;
-        } else if (memArray.size() >= (n + 1)) {
-            return memArray.get(n);
-        } else {
-            memArray.add(n, memoizationHelper(n - 1, memArray) + memoizationHelper(n - 2, memArray));
-            return memArray.get(n);
+        } else if (memArray[n] == 0){
+            memArray[n] =  memoizationHelper(n-1, memArray) + memoizationHelper(n-2, memArray);
         }
+
+        return memArray[n];
     }
 
     /**
@@ -67,13 +68,16 @@ public class Fibonacci {
      */
 
     public static int dynamic(int n) {
-        ArrayList<Integer> fib = new ArrayList<Integer>();
-        fib.add(0, 0);
-        fib.add(1, 1);
+        if (n <= 1)
+            return n;
+
+        int [] fib = new int [n+1];
+        fib[0] = 0;
+        fib[1] = 1;
         for (int i = 2; i <= n; i++) {
-            fib.add(i, fib.get(i - 1) + fib.get(i - 2));
+            fib[i] = fib[i - 1] + fib[i - 2];
         }
-        return fib.get(n);
+        return fib[n];
     }
 
     /**
@@ -272,7 +276,6 @@ public class Fibonacci {
 
         for (int i = 0; i < howManyTimesToRun; i++) {
             usedForAveragingRecursive[i] = callRecursive(largestRecursiveN);
-            System.out.println(i * 1.0 / howManyTimesToRun * 100 + "% done recursive");
         }
 
         for (int i = 2; i < howManyTimesToRun; i++) {
@@ -283,14 +286,15 @@ public class Fibonacci {
 
         for (int j = 0; j < largestRecursiveN; j++) {
             usedForAveragingRecursive[1][j] = usedForAveragingRecursive[1][j] / (howManyTimesToRun - 1);
+            System.out.println(usedForAveragingRecursive[1][j] + " time to compute F" + j + " with alg. 1");
         }
+        System.out.println();
 
         writeToFile(usedForAveragingRecursive[1], "recursive");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         for (int i = 0; i < howManyTimesToRun; i++) {
             usedForAveragingMemoization[i] = callMemoization(largestMemoizationN);
-            System.out.println(i * 1.0 / howManyTimesToRun * 100 + "% done memoization");
         }
 
         for (int i = 2; i < howManyTimesToRun; i++) {
@@ -301,13 +305,16 @@ public class Fibonacci {
 
         for (int j = 0; j < largestMemoizationN; j++) {
             usedForAveragingMemoization[1][j] = usedForAveragingMemoization[1][j] / (howManyTimesToRun - 1);
+            System.out.println(usedForAveragingMemoization[1][j] + " time to compute F" + j + " with alg. 2");
+
         }
+        System.out.println();
+
         writeToFile(usedForAveragingMemoization[1], "memoization");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         for (int i = 0; i < howManyTimesToRun; i++) {
             usedForAveragingDynamic[i] = callDynamic(largestDynamicN);
-            System.out.println(i * 1.0 / howManyTimesToRun * 100 + "% done dynamic");
         }
 
         for (int i = 2; i < howManyTimesToRun; i++) {
@@ -318,13 +325,16 @@ public class Fibonacci {
 
         for (int j = 0; j < largestDynamicN; j++) {
             usedForAveragingDynamic[1][j] = usedForAveragingDynamic[1][j] / (howManyTimesToRun - 1);
+            System.out.println(usedForAveragingDynamic[1][j] + " time to compute F" + j + " with alg. 3");
+
         }
+        System.out.println();
+
         writeToFile(usedForAveragingDynamic[1], "dynamic");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         for (int i = 0; i < howManyTimesToRun; i++) {
             usedForAveragingIterator[i] = callDynamic(largestIteratorN);
-            System.out.println(i * 1.0 / howManyTimesToRun * 100 + "% done iterator");
 
         }
 
@@ -336,13 +346,16 @@ public class Fibonacci {
 
         for (int j = 0; j < largestIteratorN; j++) {
             usedForAveragingIterator[1][j] = usedForAveragingIterator[1][j] / (howManyTimesToRun - 1);
+            System.out.println(usedForAveragingIterator[1][j] + " time to compute F" + j + " with alg. 4");
+
         }
+        System.out.println();
+
         writeToFile(usedForAveragingIterator[1], "iterator");
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         for (int i = 0; i < howManyTimesToRun; i++) {
             usedForAveragingMatrix[i] = callMatrix(largestMatrixN);
-            System.out.println(i * 1.0 / howManyTimesToRun * 100 + "% done matrix");
 
         }
 
@@ -354,7 +367,11 @@ public class Fibonacci {
 
         for (int j = 0; j < largestMatrixN; j++) {
             usedForAveragingMatrix[1][j] = usedForAveragingMatrix[1][j] / (howManyTimesToRun - 1);
+            System.out.println(usedForAveragingMatrix[1][j] + " time to compute F" + j + " with alg. 5");
+
         }
+        System.out.println();
+
         writeToFile(usedForAveragingMatrix[1], "matrix");
 
         return;
@@ -381,8 +398,7 @@ public class Fibonacci {
 
     public static void main(String[] args) {
         long before = System.nanoTime();
-
-        measureExecutionTime(20);
+        measureExecutionTime(200);
 
         long after = System.nanoTime();
         System.out.printf("Time Taken Total: %f seconds taken\n", (after - before) / Math.pow(10, 9));
