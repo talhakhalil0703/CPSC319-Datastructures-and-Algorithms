@@ -2,6 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import medfilt
+from scipy.optimize import curve_fit
 
 def createFigures(algType, filter):
     n = []
@@ -17,7 +18,7 @@ def createFigures(algType, filter):
     mean = np.mean(times)
     std = np.std(times)
 
-    print(algType+ ": " + str(mean+2*std) + " - " +str(mean-2*std))
+    print(algType+ ": " + str(mean+2*std) + " to " +str(mean-2*std))
     
     newTimes = []
     newIndex = []
@@ -26,20 +27,27 @@ def createFigures(algType, filter):
         if (item > (mean - 2*std) and item < (mean + 2*std)):
             newTimes.append(item)
             newIndex.append(n[i])
-        else:
-           print("Tossing Value")
+        # else:
+        #    print("Tossing Value")
 
     if (filter):
          newTimes = medfilt(newTimes)
     
- 
+    values = curve_fit(linear,newIndex, newTimes)
+
+    # print("Curve fitting values: ")
+    # print(values)
     plt.plot(newIndex, newTimes, color = "red")
-    plt.scatter(newIndex, newTimes)
+    plt.plot(newIndex, linear(newIndex, *values))
     plt.xlabel("Nth Fibonacci Sequence")
     plt.ylabel("Time taken to run the Nth Fibonacci Sequence in nanoseconds")
     plt.title( algType + " Fibonacci Analysis")
+    
+    plt.savefig(algType)
     plt.show()
-    plt.savefig(algType + ".jpg")
+
+def linear(x ,a ,b):
+    return a * x + b
 
 createFigures("recursive", False)
 createFigures("memoization", True)
