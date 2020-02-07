@@ -36,7 +36,7 @@ public class Fibonacci {
             return n;
         }
 
-        int [] previousCallValues = new int [n+1];
+        int[] previousCallValues = new int[n + 1];
         previousCallValues[0] = 0;
         previousCallValues[1] = 1;
         Fibonacci memoizationHelper = new Fibonacci();
@@ -50,11 +50,11 @@ public class Fibonacci {
      * @param memArray the Array that stores previously calculated values
      * @return returns the fibonacci number corresponding to index n
      */
-    private int memoizationHelper(int n, int [] memArray) {
+    private int memoizationHelper(int n, int[] memArray) {
         if (n <= 1) {
             return n;
-        } else if (memArray[n] == 0){
-            memArray[n] =  memoizationHelper(n-1, memArray) + memoizationHelper(n-2, memArray);
+        } else if (memArray[n] == 0) {
+            memArray[n] = memoizationHelper(n - 1, memArray) + memoizationHelper(n - 2, memArray);
         }
 
         return memArray[n];
@@ -71,12 +71,11 @@ public class Fibonacci {
         if (n <= 1)
             return n;
 
-        int [] fib = new int [n+1];
+        int[] fib = new int[n + 1];
         fib[0] = 0;
         fib[1] = 1;
-        for (int i = 2; i <= n; i++) {
+        for (int i = 2; i <= n; i++)
             fib[i] = fib[i - 1] + fib[i - 2];
-        }
         return fib[n];
     }
 
@@ -178,7 +177,8 @@ public class Fibonacci {
     }
 
     /**
-     *Calls the memoization function upto the n value starting from 0
+     * Calls the memoization function upto the n value starting from 0
+     *
      * @param n the number of times to call the memoization function
      * @return the time taken to make all the calls
      */
@@ -199,6 +199,7 @@ public class Fibonacci {
 
     /**
      * Calls the dynamic function upto the n value starting from 0
+     *
      * @param n the number of times to call the dynamic function
      * @return the time taken to make all the calls
      */
@@ -218,6 +219,7 @@ public class Fibonacci {
 
     /**
      * Calls the iterator function upto the n value starting from 0
+     *
      * @param n the number of times to call the iterator function
      * @return the time taken to make all the calls
      */
@@ -238,6 +240,7 @@ public class Fibonacci {
 
     /**
      * Calls the matrix function upto the n value starting from 0
+     *
      * @param n the number of times to call the iterator function
      * @return the time taken to make all the calls
      */
@@ -258,6 +261,7 @@ public class Fibonacci {
 
     /**
      * Measures the execution time for all algorithims
+     *
      * @param howManyTimesToRun How many times to run each algorithim so the data can be averaged
      */
     public static void measureExecutionTime(int howManyTimesToRun) {
@@ -379,7 +383,8 @@ public class Fibonacci {
 
     /**
      * Writes an array into a file with the name fileName, writes the value and the index in csv format
-     * @param data the data to be written
+     *
+     * @param data     the data to be written
      * @param fileName the name to save the file as
      */
     public static void writeToFile(long[] data, String fileName) {
@@ -403,5 +408,4 @@ public class Fibonacci {
         long after = System.nanoTime();
         System.out.printf("Time Taken Total: %f seconds taken\n", (after - before) / Math.pow(10, 9));
     }
-
 }
