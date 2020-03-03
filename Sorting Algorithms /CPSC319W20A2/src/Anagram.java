@@ -24,13 +24,12 @@ public class Anagram {
         //Average running time is nlogn, and worst case is n^2 . However it is in place sorting which allows us to not consume a lot of memory especially when dealing with large data set
         if(start >= end)
             return;
-        int pivotIndex = partitionSort(start, end);
+        int pivotIndex = getPivot(start, end);
         quickSortWordsAlphabetically(start, pivotIndex-1);
         quickSortWordsAlphabetically(pivotIndex+1, end);
     }
 
     private int partitionSort(int start, int end){
-        int indexToPivot = getPivot(start, end);
         Word pivot = this.words.get(end);
 
         int pivotIndex = start;
@@ -45,9 +44,11 @@ public class Anagram {
         return pivotIndex;
     }
 
-    private static int getPivot(int start, int end) {
-        Random r = new Random();
-        return r.nextInt((end - start) + 1) + end;
+    private int getPivot(int start, int end) {
+
+        int rand =  (int)(Math.random()*((end-start)+1)  + start);
+        swapValuesAtIndex(rand, end);
+        return partitionSort(start, end);
     }
 
     private void swapValuesAtIndex(int a, int b){

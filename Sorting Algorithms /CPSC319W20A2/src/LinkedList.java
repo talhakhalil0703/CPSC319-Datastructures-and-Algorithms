@@ -35,7 +35,6 @@ public class LinkedList {
         return s;
     }
 
-
 }
 
 class Node {
