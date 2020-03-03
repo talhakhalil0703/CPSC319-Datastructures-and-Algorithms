@@ -3,9 +3,11 @@ import java.util.Random;
 
 public class Anagram {
     ArrayList<Word> words;
+    ArrayList<LinkedList> anagramList;
 
     public Anagram(ArrayList<Word> wordList){
         this.words = wordList;
+        this.anagramList = new ArrayList<>();
     }
 
     public void printReadWords(int start, int end){
@@ -14,8 +16,7 @@ public class Anagram {
             return;
         }
         for (int i = start; i < end; i++){
-            String wordToPrint = this.words.get(i).getWord();
-            System.out.println(wordToPrint);
+            this.words.get(i).printWordAndSortedWord();
         }
     }
 
@@ -30,13 +31,11 @@ public class Anagram {
 
     private int partitionSort(int start, int end){
         int indexToPivot = getPivot(start, end);
-        System.out.println(indexToPivot);
         Word pivot = this.words.get(end);
 
         int pivotIndex = start;
 
         for (int i = start; i <= (end-1); i++){
-            System.out.println(i);
             if (isALessThanB(this.words.get(i), pivot)){
                 swapValuesAtIndex(i, pivotIndex);
                 pivotIndex++;
@@ -75,8 +74,45 @@ public class Anagram {
             else if (Achar[i] > Bchar[i])
                 return false;
         }
-
         return true;
+    }
+
+    public void findAnagrams(){
+        ArrayList<String> foundAnagrams = new ArrayList<>();
+
+        for (int i = 0; i < words.size(); i++){
+            Word lookingAtWord = words.get(i);
+
+            if (foundAnagrams.size() == 0){
+                anagramList.add(new LinkedList(lookingAtWord));
+                foundAnagrams.add(lookingAtWord.getSortedWord());
+                continue;
+            }
+
+            int x = isInArray(foundAnagrams, lookingAtWord.getSortedWord());
+            if (x == -1){
+                anagramList.add(new LinkedList(lookingAtWord));
+                foundAnagrams.add(lookingAtWord.getSortedWord());
+            } else {
+                anagramList.get(x).addToList(lookingAtWord);
+            }
+        }
+
+    }
+
+    private int isInArray(ArrayList<String> foundAnagrams, String word){
+        for (int i = 0; i < foundAnagrams.size(); i++){
+            if (foundAnagrams.get(i).equals(word)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void printAnagrams() {
+        for (int i = 0; i < anagramList.size(); i++){
+            System.out.println(anagramList.get(i));
+        }
     }
 
 }

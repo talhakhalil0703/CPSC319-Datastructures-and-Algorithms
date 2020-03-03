@@ -15,8 +15,10 @@ public class FileManager {
             String line = "";
 
             while((line = buffer.readLine()) != null){
-                Word word = new Word(line);
-                words.add(word);
+                if (line != "" && line != "\n" && line != "\r" ) {
+                    Word word = new Word(line);
+                    words.add(word);
+                }
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());

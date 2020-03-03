@@ -6,4 +6,3 @@ game
 tops
 pots
 arc
-
