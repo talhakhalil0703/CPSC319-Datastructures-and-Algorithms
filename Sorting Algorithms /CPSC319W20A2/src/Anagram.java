@@ -1,11 +1,12 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Anagram {
-    ArrayList<String> words = new ArrayList<String>();
+    ArrayList<Word> words;
 
+    public Anagram(ArrayList<Word> wordList){
+        this.words = wordList;
+    }
 
     public void printReadWords(int start, int end){
         if (this.words.size() <= 0){
@@ -13,7 +14,7 @@ public class Anagram {
             return;
         }
         for (int i = start; i < end; i++){
-            String wordToPrint = this.words.get(i);
+            String wordToPrint = this.words.get(i).getWord();
             System.out.println(wordToPrint);
         }
     }
@@ -27,12 +28,10 @@ public class Anagram {
         quickSortWordsAlphabetically(pivotIndex+1, end);
     }
 
-
     private int partitionSort(int start, int end){
         int indexToPivot = getPivot(start, end);
         System.out.println(indexToPivot);
-        String pivot = this.words.get(end);
-        String temp;
+        Word pivot = this.words.get(end);
 
         int pivotIndex = start;
 
@@ -53,12 +52,15 @@ public class Anagram {
     }
 
     private void swapValuesAtIndex(int a, int b){
-        String temp = this.words.get(a);
+        Word temp = this.words.get(a);
         this.words.set(a, this.words.get(b));
         this.words.set(b, temp);
     }
 
-    private boolean isALessThanB(String A, String B){
+    private boolean isALessThanB(Word wordA, Word wordB){
+        String A = wordA.getWord();
+        String B = wordB.getWord();
+
         int shortestLength = A.length();
 
         if (A.length() > B.length())

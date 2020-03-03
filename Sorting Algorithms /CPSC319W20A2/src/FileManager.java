@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-    public ArrayList<String> readWords(String fileName){
+    public void readWords(String fileName, ArrayList<Word> words){
 
         try {
             String fileLocation = System.getProperty("user.dir") + "/" +fileName;
@@ -15,8 +15,8 @@ public class FileManager {
             String line = "";
 
             while((line = buffer.readLine()) != null){
-                String word = line;
-                this.words.add(word);
+                Word word = new Word(line);
+                words.add(word);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
