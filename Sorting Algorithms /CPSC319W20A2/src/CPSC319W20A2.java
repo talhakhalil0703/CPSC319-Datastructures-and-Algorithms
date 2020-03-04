@@ -6,7 +6,7 @@ public class CPSC319W20A2 {
         ArrayList<Word> words = new ArrayList<>();
         FileManager manager = new FileManager();
         manager.readWords(words);
-        Anagram anagram = new Anagram(words);ß
+        Anagram anagram = new Anagram(words);
         anagram.quickSortWordsAlphabetically(0, (anagram.words.size()-1));
         anagram.findAnagrams();
         anagram.printAnagrams();
