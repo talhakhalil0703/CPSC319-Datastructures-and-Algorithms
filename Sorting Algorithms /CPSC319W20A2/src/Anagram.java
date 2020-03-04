@@ -45,7 +45,6 @@ public class Anagram {
     }
 
     private int getPivot(int start, int end) {
-
         int rand =  (int)(Math.random()*((end-start)+1)  + start);
         swapValuesAtIndex(rand, end);
         return partitionSort(start, end);
