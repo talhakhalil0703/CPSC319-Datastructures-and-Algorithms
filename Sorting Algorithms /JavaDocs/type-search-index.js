@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"Anagram"},{"p":"<Unnamed>","l":"CPSC319W20A2"},{"p":"<Unnamed>","l":"InputManager"},{"p":"<Unnamed>","l":"LinkedList"},{"p":"<Unnamed>","l":"Node"},{"p":"<Unnamed>","l":"Word"}]
