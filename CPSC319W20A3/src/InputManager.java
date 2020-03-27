@@ -26,7 +26,7 @@ public class InputManager {
     /**
      * Prompts the user to enter the name of the file to analyze, and if the file exists reads the file and stores the words in an ArrayList, if it doesn't keeps asking the user until they do enter one.
      */
-    public void promptUserForFile() {
+    public String promptUserForFile() {
         try {
             while (words == null) {
                 System.out.println("Name of file to be read: ");
@@ -47,6 +47,8 @@ public class InputManager {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        return fileToRead;
     }
 
     /**
@@ -106,7 +108,7 @@ public class InputManager {
         try {
             Scanner scanner = new Scanner(System.in);
             while (type != 1 && type != 2 && type != 3) {
-                System.out.println("Enter the BST traversal method: (1 = In-order, 2 = Pre-order, 3 = Post-order): ");
+                System.out.println("Enter the BST traversal method: (1 = In-order, 2 = Pre-order, 3 = Post-order) for " + fileToRead + ": ");
                 try {
                     String line = scanner.nextLine();
                     type = Integer.valueOf(line);
