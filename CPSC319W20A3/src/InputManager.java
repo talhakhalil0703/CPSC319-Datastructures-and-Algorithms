@@ -17,7 +17,7 @@ public class InputManager {
     /**
      * Name of the file to read
      */
-    String fileToRead = "test.txt";
+    String fileToRead = "";
     /**
      * An ArrayList of words in the file
      */
@@ -101,14 +101,14 @@ public class InputManager {
      *
      * @return An int, 1 for in order, 2 for pre order, and 3 for post order, displaying of the tree
      */
-    public int getPrintType() {
+    public int getType(String message) {
 
         int type = 0;
 
         try {
             Scanner scanner = new Scanner(System.in);
             while (type != 1 && type != 2 && type != 3) {
-                System.out.println("Enter the BST traversal method: (1 = In-order, 2 = Pre-order, 3 = Post-order) for " + fileToRead + ": ");
+                System.out.println(message);
                 try {
                     String line = scanner.nextLine();
                     type = Integer.valueOf(line);
@@ -128,4 +128,26 @@ public class InputManager {
         return type;
     }
 
+    /**
+     * Reads a single word from the user
+     * @return String
+     */
+
+    public String readSingleWord() {
+        String line= "";
+        try {
+            System.out.println("Name of the word you would like to search for: ");
+            Scanner scanner = new Scanner(System.in);
+            line = scanner.nextLine().trim();
+            if (line.isEmpty()) {
+                System.out.println("No word was typed");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return line;
+
+    }
 }

@@ -32,6 +32,7 @@ public class BinaryTree {
         createTree();
         this.fileName = fileName;
         printStatisticsOfTree();
+        optionMenu();
     }
 
     /**
@@ -70,8 +71,7 @@ public class BinaryTree {
      */
     public void printTree() {
         InputManager input = new InputManager();
-        int Type = input.getPrintType(); //Ensures Type is either 1, 2 or 3
-
+        int Type = input.getType( "Enter the BST traversal method: (1 = In-order, 2 = Pre-order, 3 = Post-order) for " + fileName + ": "); //Ensures Type is either 1, 2 or 3
         if (Type == 1) {
             System.out.print("Pre-order output: ");
             prePrint(head);
@@ -286,6 +286,23 @@ public class BinaryTree {
         }
 
         return null;
+
+    }
+
+    /**
+     * Option menu that allows the user to search for a word in a tree, or print the tree, or quit the application.
+     */
+    public void optionMenu(){
+        InputManager input = new InputManager();
+        int Type = 0;
+        while(Type !=3) {
+            Type = input.getType("If you would like to search for a word in the tree press (1), if you would like to print the tree press (2), if you would like to quit press (3)"); //Ensures Type is either 1, 2 or 3
+            if (Type == 1) {
+                searchForWord(input.readSingleWord());
+            } else if (Type == 2) {
+                printTree();
+            }
+        }
 
     }
 
