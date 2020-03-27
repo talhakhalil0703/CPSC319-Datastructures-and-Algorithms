@@ -21,10 +21,11 @@ public class BinaryTree {
      * Name of the file that was read
      */
     String fileName;
+
     /**
      * Constructor for the Binary Tree, creates the Tree given an ArrayList of words.
      *
-     * @param words
+     * @param words ArrayList of words to be put into the BinaryTree
      */
     public BinaryTree(ArrayList<String> words, String fileName) {
         this.words = words;
@@ -40,30 +41,31 @@ public class BinaryTree {
      */
     private void createTree() {
         for (int i = 1; i < words.size(); i++) {
-            Node node = head;
-            while (true) {
-                if (node.getWord().compareTo(words.get(i)) > 0) {
-                    if (node.getLeftNode() != null) {
-                        node = node.leftNode;
-                    } else {
-                        node.leftNode = new Node(words.get(i));
-                        break;
-                    }
-
-                } else if (node.getWord().compareTo(words.get(i)) < 0) {
-                    if (node.getRightNode() != null) {
-                        node = node.rightNode;
-                    } else {
-                        node.rightNode = new Node(words.get(i));
-                        break;
-                    }
-                } else {
-                    node.incrementFrequency();
-                    break;
-                }
-            }
+            insertWord(head, words.get(i));
         }
-        System.out.println("Tree has been created.");
+    }
+
+    /**
+     * Creates the Binary tree by doing lexiographical comparison.
+     * @param node The node at which you are at
+     * @param word the word to add to the tree
+     */
+    private void insertWord(Node node, String word) {
+        if (node.getWord().compareTo(word) > 0) {
+            if (node.getLeftNode() != null) {
+                insertWord(node.getLeftNode(), word);
+            } else {
+                node.leftNode = new Node(word);
+            }
+        } else if (node.getWord().compareTo(word) < 0) {
+            if (node.getRightNode() != null) {
+                insertWord(node.getRightNode(), word);
+            } else {
+                node.rightNode = new Node(word);
+            }
+        } else {
+            node.incrementFrequency();
+        }
     }
 
     /**
@@ -71,7 +73,7 @@ public class BinaryTree {
      */
     public void printTree() {
         InputManager input = new InputManager();
-        int Type = input.getType( "Enter the BST traversal method: (1 = In-order, 2 = Pre-order, 3 = Post-order) for " + fileName + ": "); //Ensures Type is either 1, 2 or 3
+        int Type = input.getType("Enter the BST traversal method: (1 = In-order, 2 = Pre-order, 3 = Post-order) for " + fileName + ": "); //Ensures Type is either 1, 2 or 3
         if (Type == 1) {
             System.out.print("Pre-order output: ");
             prePrint(head);
@@ -125,19 +127,21 @@ public class BinaryTree {
 
     /**
      * Calls the function numberOfWords, which is a recursive fucntion and returns how many nodes there are in the tree.
+     *
      * @return the number of nodes are in the tree
      */
-    private int totalNumberOfWords(){
+    private int totalNumberOfWords() {
         return numberOfWords(head, 0);
     }
 
     /**
      * A recursive fucntion and returns how many nodes there are in the tree.
-     * @param node Node at which you are
+     *
+     * @param node  Node at which you are
      * @param count How many nodes have been counted so far
      * @return the number of nodes  counted so far
      */
-    private int numberOfWords(Node node, int count){
+    private int numberOfWords(Node node, int count) {
         if (node == null) {
             return count;
         }
@@ -149,19 +153,21 @@ public class BinaryTree {
 
     /**
      * Calls the function numberOfUniqueWords, which is a recursive fucntion and returns how many nodes there are in the tree with a frequency of 1.
+     *
      * @return the number of nodes in the tree with a frequency of 1
      */
-    private int totalNumberOfUniqueWords(){
+    private int totalNumberOfUniqueWords() {
         return numberOfUniqueWords(head, 0);
     }
 
     /**
      * A recursive function and returns how many nodes there are in the tree with a frequency of 1.
-     * @param node Node at which you are
+     *
+     * @param node  Node at which you are
      * @param count How many nodes have been counted so far with a frequency of 1.
      * @return the number of nodes counted so far with a frequency of 1.
      */
-    private int numberOfUniqueWords(Node node, int count){
+    private int numberOfUniqueWords(Node node, int count) {
         if (node == null) {
             return count;
         }
@@ -176,75 +182,78 @@ public class BinaryTree {
     /**
      * Calls the function oftenWords, this function finds the word(s) with the highest frequency and prints them out with their frequency
      */
-    private void mostOftenWords(){
+    private void mostOftenWords() {
         ArrayList<Node> nodes = new ArrayList<>();
-        nodes = oftenWords(head, 0, nodes);
-        for (Node node: nodes){
+        Node empty = new Node("empty"); // this empty word with frequency 0  is added to ensure that if the head has the highest frequency that it doesn't get reperesented twice, so a empty starting point is needed
+        empty.setFrequency(0);
+        nodes.add(empty);
+        nodes = oftenWords(head, nodes);
+        for (Node node : nodes) {
             System.out.println(node.getWord() + " = " + node.getFrequency() + " times");
         }
     }
 
     /**
      * Recursive function that finds the the highest frequency, and adds that Node to an ArrayList of nodes.
-     * @param node Node which contains the word with the highest frequency
-     * @param frequency the highest frequency present of a word in the tree
-     * @param nodes an ArrayList of all other words with a matching frequency to that of the highest frequency present in the tree
+     *
+     * @param node      Node which contains the word with the highest frequency
+     * @param nodes     an ArrayList of all other words with a matching frequency to that of the highest frequency present in the tree
      * @return ArrayList of Nodes which cna be used to print the words with the highest frequency
      */
-    private ArrayList<Node> oftenWords(Node node, int frequency, ArrayList<Node> nodes){
+    private ArrayList<Node> oftenWords(Node node , ArrayList<Node> nodes) {
         if (node == null) {
             return nodes;
         }
 
-        if (node.getFrequency() > frequency){ // Checks to see if the frequency is greater than the previous highest recorded frequency, if it is it creates a new ArrayList, essentially deleting the old one, if the frequency matches appends the node on to the Arraylist.
-            frequency = node.getFrequency();
-            nodes = new ArrayList<Node>();
+        if (node.getFrequency() == nodes.get(0).getFrequency()) {
             nodes.add(node);
-        } else if (node.getFrequency() == frequency){
+        } else if (node.getFrequency() > nodes.get(0).getFrequency()) { // Checks to see if the frequency is greater than the previous highest recorded frequency, if it is it creates a new ArrayList, essentially deleting the old one, if the frequency matches appends the node on to the Arraylist.
+            nodes = new ArrayList<>();
             nodes.add(node);
         }
 
-        nodes = oftenWords(node.leftNode,frequency, nodes);
-        nodes = oftenWords(node.rightNode, frequency,nodes);
+        nodes = oftenWords(node.leftNode, nodes);
+        nodes = oftenWords(node.rightNode, nodes);
+
         return nodes;
     }
 
     /**
      * Finds the maximum depth of the tree.
+     *
      * @return Integer with the value of the depth of the tree
      */
 
-    private int maximumDepth(){
+    private int maximumDepth() {
         return depth(head);
     }
 
     /**
      * Recursive function calculating the highest depth of the tree, incremented only if the there exists either a left or right node
+     *
      * @param node Node at which you are
      * @return Deepest level in the tree
      */
-    private int depth(Node node){
+    private int depth(Node node) {
         if (node == null) {
             return 0;
-        }
-        else  {
+        } else {
             int leftLevel = depth(node.leftNode);
             int rightLevel = depth(node.rightNode);
 
-            if (leftLevel > rightLevel){
-                return (leftLevel +1);
+            if (leftLevel > rightLevel) {
+                return (leftLevel + 1);
             } else {
-                return (rightLevel +1);
+                return (rightLevel + 1);
             }
         }
-
 
     }
 
     /**
      * After the tree is created, this prints the statistcs of the tree including, number of words, number of words with frequency of 1, words with the highest frequency and the depth of the tree.
      */
-    private void printStatisticsOfTree(){
+    private void printStatisticsOfTree() {
         System.out.println("Total number of words in " + fileName + " = " + totalNumberOfWords());
         System.out.println("Number of unique words in " + fileName + " = " + totalNumberOfUniqueWords());
         System.out.println("The word(s) which occur(s) most often and the number of times that it/they occur(s) = ");
@@ -254,48 +263,51 @@ public class BinaryTree {
 
     /**
      * Searches for a word in the Tree, and prints out the frequency of the word if the word is found.
+     *
      * @param word The word you want to search for.
      */
-    public void searchForWord(String word){
+    public void searchForWord(String word) {
         word = word.toLowerCase();
-        Node x = nodeSearch(head, word);
+        int x = nodeSearch(head, word, 0);
 
-        if (x != null){
-            System.out.println("Found! It appears " + x.getFrequency() +" times in the input text file.");
+        if (x != 0) {
+            System.out.println("Found! It appears " + x + " times in the input text file.");
         } else {
             System.out.println("Word not found!");
         }
     }
 
     /**
-     * Recursive serach in the tree for the Word
+     * Recursive search in the tree for the Word
+     *
      * @param node Node at which you are at
      * @param word The word to search for
      * @return A node is returned if the word is found, else it's null
      */
-    private Node nodeSearch(Node node, String word){
-        if (node ==  null){
-            return null;
-        }
-        if (node.getWord().compareTo(word) > 0){
-            nodeSearch(node.leftNode, word);
-        } else if (node.getWord().compareTo(word) < 0){
-            nodeSearch(node.rightNode, word);
-        } else {
-            return node;
+    private int nodeSearch(Node node, String word, int frequency) {
+        if (node == null) {
+            return frequency;
         }
 
-        return null;
+        if (node.getWord().compareTo(word) > 0) {
+            frequency = nodeSearch(node.leftNode, word, frequency);
+        } else if (node.getWord().compareTo(word) < 0) {
+            frequency = nodeSearch(node.rightNode, word, frequency);
+        } else {
+            return node.getFrequency();
+        }
+
+        return frequency;
 
     }
 
     /**
      * Option menu that allows the user to search for a word in a tree, or print the tree, or quit the application.
      */
-    public void optionMenu(){
+    public void optionMenu() {
         InputManager input = new InputManager();
         int Type = 0;
-        while(Type !=3) {
+        while (Type != 3) {
             Type = input.getType("If you would like to search for a word in the tree press (1), if you would like to print the tree press (2), if you would like to quit press (3)"); //Ensures Type is either 1, 2 or 3
             if (Type == 1) {
                 searchForWord(input.readSingleWord());
@@ -306,9 +318,7 @@ public class BinaryTree {
 
     }
 
-
 }
-
 
 /**
  * Nodes that are used by the Binary Tree contains, the word stored, it's frequency, the left node, and the right node
@@ -339,29 +349,11 @@ class Node {
     /**
      * Constructor for the Node, takes word as an argument and increments the frequency by 1
      *
-     * @param word
+     * @param word String word that is to be stored in the node.
      */
     public Node(String word) {
         this.word = word;
         this.frequency = 1;
-    }
-
-    /**
-     * Sets the left node
-     *
-     * @param leftNode
-     */
-    public void setLeftNode(Node leftNode) {
-        this.leftNode = leftNode;
-    }
-
-    /**
-     * Sets the right node
-     *
-     * @param rightNode
-     */
-    public void setRightNode(Node rightNode) {
-        this.rightNode = rightNode;
     }
 
     /**
@@ -391,6 +383,13 @@ class Node {
         return frequency;
     }
 
+    /**
+     * Sets the frequency to a given value
+     * @param f Value to set the frequency to
+     */
+    public void setFrequency(int f){
+        frequency = f;
+    }
     /**
      * Increments the frequency by 1
      */

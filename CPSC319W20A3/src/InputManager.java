@@ -13,7 +13,7 @@ public class InputManager {
     /**
      * Name of the file to read
      */
-    String fileToRead = "";
+    String fileToRead = "3.txt";
     /**
      * An ArrayList of words in the file
      */
@@ -25,7 +25,7 @@ public class InputManager {
     public String promptUserForFile() {
         try {
             while (words == null) {
-                System.out.println("Name of file to be read: ");
+                System.out.print("Name of file to be read: ");
                 Scanner scanner = new Scanner(System.in);
                 String line = scanner.nextLine().trim();
                 if (line.isEmpty()) {
@@ -33,7 +33,7 @@ public class InputManager {
                 } else {
                     fileToRead = line;
                 }
-
+                System.out.println();
                 readFile();
 
                 if (words == null) {
@@ -58,6 +58,8 @@ public class InputManager {
             }
             String fileLocation = System.getProperty("user.dir") + "/" + fileToRead;
             System.out.println("Trying to read file located at:" + fileLocation);
+            System.out.println();
+            System.out.println();
             FileReader reader = new FileReader(fileLocation);
             BufferedReader buffer = new BufferedReader(reader);
 
@@ -73,8 +75,6 @@ public class InputManager {
 
             if (words.size() == 0) {
                 words = null;
-            } else {
-                System.out.println(fileLocation + " was read.");
             }
 
         } catch (Exception e) {
