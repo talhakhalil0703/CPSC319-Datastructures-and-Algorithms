@@ -67,8 +67,11 @@ public class InputManager {
             words = new ArrayList<>();
 
             while ((line = buffer.readLine()) != null) {
-                String[] lineWords = line.replaceAll("[^0-9a-zA-Z ]", " ").toLowerCase().split("\\s+"); // Cleans the line of any unwanted symbols
+                String[] lineWords = line.replaceAll("[^0-9a-zA-Z ]",  " ").toLowerCase().split("\\s+"); // Cleans the line of any unwanted symbols
                 for (String singleWord : lineWords) {
+                    if (singleWord.isEmpty()){
+                        continue;
+                    }
                     words.add(singleWord); //Takes the single words in lineWords and adds them to ArrayList
                 }
             }
