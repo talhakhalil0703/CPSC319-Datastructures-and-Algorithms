@@ -1,5 +1,5 @@
 /**
- * Assignment 3, this file run the code of te Binary Tree and gets the inital user input
+ * Assignment 3, this file runs the code of te Binary Tree and gets the inital user input
  *
  * @author Talha Khalil
  * @since March 26, 2020

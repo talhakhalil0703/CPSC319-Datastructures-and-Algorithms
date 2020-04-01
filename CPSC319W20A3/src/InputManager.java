@@ -13,14 +13,14 @@ public class InputManager {
     /**
      * Name of the file to read
      */
-    String fileToRead = "3.txt";
+    String fileToRead = ""; //This is just a placeholder
     /**
      * An ArrayList of words in the file
      */
     ArrayList<String> words;
 
     /**
-     * Prompts the user to enter the name of the file to analyze, and if the file exists reads the file and stores the words in an ArrayList, if it doesn't keeps asking the user until they do enter one.
+     * Prompts the user to enter the name of the file to analyze, and if the file exists reads the file and stores the words in an ArrayList, if it doesn't exist, keeps asking the user until they do enter a valid file name.
      */
     public String promptUserForFile() {
         try {
@@ -59,7 +59,6 @@ public class InputManager {
             String fileLocation = System.getProperty("user.dir") + "/" + fileToRead;
             System.out.println("Trying to read file located at:" + fileLocation);
             System.out.println();
-            System.out.println();
             FileReader reader = new FileReader(fileLocation);
             BufferedReader buffer = new BufferedReader(reader);
 
@@ -69,7 +68,7 @@ public class InputManager {
             while ((line = buffer.readLine()) != null) {
                 String[] lineWords = line.replaceAll("[^0-9a-zA-Z ]",  " ").toLowerCase().split("\\s+"); // Cleans the line of any unwanted symbols
                 for (String singleWord : lineWords) {
-                    if (singleWord.isEmpty()){
+                    if (singleWord.isEmpty()){ // Making sure not to include any whitespace in the tree
                         continue;
                     }
                     words.add(singleWord); //Takes the single words in lineWords and adds them to ArrayList
@@ -96,9 +95,9 @@ public class InputManager {
 
 
     /**
-     * Returns the Binary Tree display type the user wants
+     * Returns an integer of 1-3 used for the options in the menu, if the used does not enter 1-3, keeps asking the user
      *
-     * @return An int, 1 for in order, 2 for pre order, and 3 for post order, displaying of the tree
+     * @return integer value ranging from 1-3
      */
     public int getType(String message) {
 

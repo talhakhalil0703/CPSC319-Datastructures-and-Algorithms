@@ -73,14 +73,14 @@ public class BinaryTree {
      */
     public void printTree() {
         InputManager input = new InputManager();
-        int Type = input.getType("Enter the BST traversal method: (1 = Pre-order, 2 = In-order, 3 = Post-order) for " + fileName + ": "); //Ensures Type is either 1, 2 or 3
+        int Type = input.getType("Enter the BST traversal method: (1 = In-order, 2 = Pre-order , 3 = Post-order) for " + fileName + ": "); //Ensures Type is either 1, 2 or 3
         if (Type == 1) {
-            System.out.print("Pre-order output: ");
-            prePrint(head);
-            System.out.println();
-        } else if (Type == 2) {
             System.out.print("In-order output: ");
             orderPrint(head);
+            System.out.println();
+        } else if (Type == 2) {
+            System.out.print("Pre-order output: ");
+            prePrint(head);
             System.out.println();
         } else {
             System.out.print("Post-order output: ");
@@ -126,7 +126,7 @@ public class BinaryTree {
     }
 
     /**
-     * Calls the function numberOfWords, which is a recursive fucntion and returns how many nodes there are in the tree.
+     * Calls the function numberOfWords, which is a recursive function and returns how many nodes there are in the tree.
      *
      * @return the number of nodes are in the tree
      */
@@ -152,7 +152,7 @@ public class BinaryTree {
     }
 
     /**
-     * Calls the function numberOfUniqueWords, which is a recursive fucntion and returns how many nodes there are in the tree with a frequency of 1.
+     * Calls the function numberOfUniqueWords, which is a recursive function and returns how many nodes there are in the tree with a frequency of 1.
      *
      * @return the number of nodes in the tree with a frequency of 1
      */
@@ -251,7 +251,7 @@ public class BinaryTree {
     }
 
     /**
-     * After the tree is created, this prints the statistcs of the tree including, number of words, number of words with frequency of 1, words with the highest frequency and the depth of the tree.
+     * After the tree is created, this prints the statistics of the tree including, number of words, number of words with frequency of 1, words with the highest frequency and the depth of the tree.
      */
     private void printStatisticsOfTree() {
         System.out.println("Total number of words in " + fileName + " = " + totalNumberOfWords());
