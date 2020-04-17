@@ -1,13 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Matrix {
-    int sizeOfSubsections;
-    int numberOfVertices;
-    int[][] edges;
-    Node[] vertices;
-    int[] visited;
-    String traversal;
+    private int sizeOfSubsections;
+    private int numberOfVertices;
+    private int[][] edges;
+    private Node[] vertices;
+    private int[] visited;
+    private String traversal;
+    private int[] parent;
 
     public Matrix(int sizeOfSubsections, int numberOfVertices, Node[] vertices) {
         this.sizeOfSubsections = sizeOfSubsections;
@@ -15,7 +13,7 @@ public class Matrix {
         this.vertices = vertices;
         edges = new int[numberOfVertices][numberOfVertices];
         createMatrix();
-
+        minimumSpanningTreeToString();
     }
 
     private void createMatrix() {
@@ -25,18 +23,6 @@ public class Matrix {
                 edges[j][i] = edges[i][j];
             }
         }
-    }
-
-    public String matrixToString() {
-        String S = "Edge\tWeight\n";
-        for (int i = 0; i < numberOfVertices; i++) {
-            for (int j = i; j < numberOfVertices; j++) {
-                if (i == j)
-                    continue;
-                S += i + " - " + j + "\t" + edges[i][j] + "\n";
-            }
-        }
-        return S;
     }
 
     public String depthFirstTraversalToString() {
@@ -60,8 +46,8 @@ public class Matrix {
         }
     }
 
-    public String minimumSpanningTreeToString() {
-        int[] parent = new int[numberOfVertices];
+    public void minimumSpanningTreeToString() {
+        parent = new int[numberOfVertices];
         int[] key = new int[numberOfVertices];
         boolean[] extracted = new boolean[numberOfVertices];
 
@@ -86,12 +72,6 @@ public class Matrix {
                 }
             }
         }
-
-       String S = "Edge\tWeight\n";
-        for (int i = 1; i < numberOfVertices; i++)
-            S += parent[i] + " - " + i + "\t" + edges[i][parent[i]] + "\n";
-
-        return S;
     }
 
     private int returnMinimumKeyIndex(boolean[] extracted, int[] key) {
@@ -110,6 +90,18 @@ public class Matrix {
 
     public Node[] getVertices() {
         return vertices;
+    }
+
+    public int getNumberOfVertices() {
+        return numberOfVertices;
+    }
+
+    public int[][] getEdges() {
+        return edges;
+    }
+
+    public int[] getParent() {
+        return parent;
     }
 
     @Override
