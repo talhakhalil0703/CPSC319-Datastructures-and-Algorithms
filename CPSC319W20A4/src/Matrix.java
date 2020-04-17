@@ -73,7 +73,6 @@ public class Matrix {
             key[i] = Integer.MAX_VALUE;
             extracted[i] = false;
             parent[i] = -1;
-
         }
 
         for (int count = 0; count < numberOfVertices; count++){
@@ -88,9 +87,9 @@ public class Matrix {
             }
         }
 
-       String S = "Edge\tWeight";
+       String S = "Edge\tWeight\n";
         for (int i = 1; i < numberOfVertices; i++)
-            S += parent[i] + " - " + i + "\t" + edges[i][parent[i]];
+            S += parent[i] + " - " + i + "\t" + edges[i][parent[i]] + "\n";
 
         return S;
     }
