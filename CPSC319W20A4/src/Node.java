@@ -17,14 +17,20 @@ public class Node {
      * The pixels stored in a one dimensional array, this is how the file manager piped in the pixels
      */
     private int[] pixelsArray;
+    /**
+     * Index of the vertice
+     */
+    private int index;
 
     /**
      * Constructor for the Node which takes in the pixel size, and the pixels array from which to create the 2D array
-     * @param size the size of the pixel subsections, 3 for 3x3, 5 for 5x5, and so on
+     *
+     * @param size        the size of the pixel subsections, 3 for 3x3, 5 for 5x5, and so on
      * @param pixelsArray The pixels stored in a one dimensional array, this is how the file manager piped in the pixels
      */
-    public Node(int size, int[] pixelsArray) {
+    public Node(int index, int size, int[] pixelsArray) {
         this.size = size;
+        this.index = index;
         this.pixelsArray = pixelsArray;
         this.pixels = new int[size][size];
         populatePixels();
@@ -49,6 +55,7 @@ public class Node {
 
     /**
      * Gets the 2D pixels array
+     *
      * @return 2D pixels array
      */
     public int[][] getPixels() {
@@ -57,6 +64,7 @@ public class Node {
 
     /**
      * Gets all the pixels in the array
+     *
      * @return all the pixels in the array
      */
     public int[] getPixelsArray() {
@@ -65,16 +73,18 @@ public class Node {
 
     /**
      * Calculates the difference between two nodes
+     *
      * @param otherNode node to which to compare to
      * @return the amount of pixels that are different
      */
     public int compareWeight(Node otherNode) {
         int difference = 0;
-        for (int i = 0; i < pixelsArray.length; i++) {
-            if (pixelsArray[i] != otherNode.getPixelsArray()[i])
-                difference++;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (pixels[i][j] != otherNode.getPixels()[i][j])
+                    difference++;
+            }
         }
         return difference;
     }
-
 }

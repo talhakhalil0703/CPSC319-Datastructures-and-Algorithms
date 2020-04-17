@@ -1,5 +1,6 @@
 /**
  * Matrix file which contains the edges, vertices, and creates the graphs, the minimim spanning tree, and depth traversal
+ *
  * @author Talha Khalil
  * @since April 16, 2020
  */
@@ -35,9 +36,10 @@ public class Matrix {
 
     /**
      * Constructor for the matrix, creates the graph and the minimum spanning tree
+     *
      * @param sizeOfSubsections he size of the pixel subesections, example 3, for 3x3, 5 for 5x5 and so on
-     * @param numberOfVertices The amount of vertices in the graph
-     * @param vertices Contains all the vertices and their subsections
+     * @param numberOfVertices  The amount of vertices in the graph
+     * @param vertices          Contains all the vertices and their subsections
      */
     public Matrix(int sizeOfSubsections, int numberOfVertices, Node[] vertices) {
         this.sizeOfSubsections = sizeOfSubsections;
@@ -62,10 +64,11 @@ public class Matrix {
 
     /**
      * Creates a string which can be used to print the Depth first traversal
+     *
      * @return String which can be written to a file
      */
     public String depthFirstTraversalToString() {
-        if (edges.length == 0){
+        if (edges.length == 0) {
             System.out.println("There are was no graph created");
             return "";
         }
@@ -81,6 +84,7 @@ public class Matrix {
 
     /**
      * Recursive function which traverses the graph
+     *
      * @param i the index of the node which it is currently at
      */
     private void DFS(int i) {
@@ -111,11 +115,11 @@ public class Matrix {
             parent[i] = -1;
         }
 
-        for (int count = 0; count < numberOfVertices; count++){ // For the number of vertices
+        for (int count = 0; count < numberOfVertices; count++) { // For the number of vertices
             int min = returnMinimumKeyIndex(extracted, key); // Extract the minimal vertice if it has not already been extracted
-            for(int i = 0; i < numberOfVertices; i++){ // For the number of vertices that have not been extracted
-                if (!extracted[i]){
-                    if (edges[min][i] < key[i]){ // If their weight is less than the key they have update the key and parent
+            for (int i = 0; i < numberOfVertices; i++) { // For the number of vertices that have not been extracted
+                if (!extracted[i]) {
+                    if (edges[min][i] < key[i]) { // If their weight is less than the key they have update the key and parent
                         key[i] = edges[min][i];
                         parent[i] = min;
                     }
@@ -126,8 +130,9 @@ public class Matrix {
 
     /**
      * Returns the index of smallest vertice edge given that it has not already been extracted
+     *
      * @param extracted Array of extracted vertices
-     * @param key Array of the smmallest edges for a vertice
+     * @param key       Array of the smmallest edges for a vertice
      * @return the index of the smallest vertice edge
      */
     private int returnMinimumKeyIndex(boolean[] extracted, int[] key) {
@@ -145,6 +150,7 @@ public class Matrix {
 
     /**
      * Gets the vertices
+     *
      * @return vertices
      */
     public Node[] getVertices() {
@@ -153,6 +159,7 @@ public class Matrix {
 
     /**
      * Gets the number of vertices in the graph
+     *
      * @return int of the number of vertices in the graph
      */
     public int getNumberOfVertices() {
@@ -161,6 +168,7 @@ public class Matrix {
 
     /**
      * Gets the edges of the graph
+     *
      * @return the edges of the graph
      */
     public int[][] getEdges() {
@@ -169,6 +177,7 @@ public class Matrix {
 
     /**
      * Gets the parents of each vertice
+     *
      * @return the parent of each vertice
      */
     public int[] getParent() {
