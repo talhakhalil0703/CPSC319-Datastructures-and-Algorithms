@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -40,23 +42,30 @@ public class FileManager {
 
             Scanner scan = new Scanner(reader);
 
-            int sizeOfSubsections = scan.nextInt();
-            scan.nextInt();
-            int numberOfVertices = scan.nextInt();
-            System.out.println("Creating a graph with size: " + sizeOfSubsections + "X" + sizeOfSubsections + " with " + numberOfVertices + " vertices");
-            int index;
-            int[] values = new int[sizeOfSubsections * sizeOfSubsections];
-            Node[] vertices = new Node[numberOfVertices];
-            while (scan.hasNext()) {
-                index = scan.nextInt();
-                for (int i = 0; i < sizeOfSubsections * sizeOfSubsections; i++) {
-                    values[i] = scan.nextInt();
+            try {
+                int sizeOfSubsections = scan.nextInt();
+                scan.nextInt();
+                int numberOfVertices = scan.nextInt();
+                System.out.println("Creating a graph with size: " + sizeOfSubsections + "X" + sizeOfSubsections + " with " + numberOfVertices + " vertices");
+                int index;
+                int[] values = new int[sizeOfSubsections * sizeOfSubsections];
+                Node[] vertices = new Node[numberOfVertices];
+                while (scan.hasNext()) {
+                    index = scan.nextInt();
+                    for (int i = 0; i < sizeOfSubsections * sizeOfSubsections; i++) {
+                        values[i] = scan.nextInt();
+                    }
+                    vertices[index] = new Node(index, sizeOfSubsections, values);
                 }
-                vertices[index] = new Node(index, sizeOfSubsections, values);
+
+                return new Matrix(sizeOfSubsections, numberOfVertices, vertices);
+            } catch (InputMismatchException z) {
+                System.out.println("An incorrect file was used, this does not follow the format layed out by the assignment.");
+                System.exit(0);
+            } catch (NoSuchElementException x) {
+                System.out.println("An incorrect file was used, this does not follow the format layed out by the assignment.");
+                System.exit(0);
             }
-
-            return new Matrix(sizeOfSubsections, numberOfVertices, vertices);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
