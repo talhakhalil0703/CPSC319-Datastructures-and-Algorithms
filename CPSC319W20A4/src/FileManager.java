@@ -1,13 +1,11 @@
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class FileManager {
-    String fileToRead;
-    public Matrix readFile(String fileToRead) {
-        this.fileToRead = fileToRead;
 
+    public Matrix readFile(String fileToRead) {
         try {
             String fileLocation = System.getProperty("user.dir") + "/" + fileToRead;
             System.out.println("Trying to read file located at:" + fileLocation);
@@ -47,6 +45,15 @@ public class FileManager {
         return null;
     }
 
-    
+    public void writeToFile(String data, String fileName) {
+        try {
+            FileWriter writer = new FileWriter(fileName, false);
+            writer.write(data);
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
 }

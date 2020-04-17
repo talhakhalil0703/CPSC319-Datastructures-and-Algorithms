@@ -7,7 +7,9 @@ public class CPSC319W20A4 {
             System.exit(0);
         }
 
-        fileManager.readFile(args[0]);
+        Matrix matrix = fileManager.readFile(args[0]);
+        fileManager.writeToFile(matrix.matrixToString(), args[0].replace("data", "GRAPH"));
+        fileManager.writeToFile(matrix.depthFirstTraversalToString(), args[0].replace("data", "DFT"));
     }
 
 }

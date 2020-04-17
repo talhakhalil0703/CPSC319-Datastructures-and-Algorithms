@@ -5,6 +5,8 @@ public class Matrix {
     int numberOfVertices;
     int [][] edges;
     Node [] vertices;
+    int [] visited;
+    String traversal;
 
     public Matrix(int sizeOfSubsections, int numberOfVertices, Node [] vertices){
         this.sizeOfSubsections = sizeOfSubsections;
@@ -12,7 +14,6 @@ public class Matrix {
         this.vertices = vertices;
         edges = new int [numberOfVertices][numberOfVertices];
         createMatrix();
-        printMatrix();
     }
 
     private void createMatrix(){
@@ -24,16 +25,37 @@ public class Matrix {
         }
     }
 
-    private void printMatrix(){
-        String S = "Edge    Weight\n";
+    public String matrixToString(){
+        String S = "Edge\tWeight\n";
         for (int i =0; i < numberOfVertices; i++){
             for (int j = i; j < numberOfVertices; j++){
                 if (i==j)
                     continue;
-                S += i + " - " + j + "  " + edges[i][j] + "\n";
+                S += i + " - " + j + "\t" + edges[i][j] + "\n";
             }
         }
-        System.out.println(S);
+        return S;
+    }
+
+    public String depthFirstTraversalToString(){
+         traversal = "Edge\tWeight\n";
+        visited = new int [numberOfVertices];
+
+        for (int i =0; i < numberOfVertices; i++)
+            visited[i] = 0;
+
+        DFS(0);
+        return traversal;
+    }
+
+    private void DFS(int i){
+        visited[i] = 1;
+        for(int j = 0; j<numberOfVertices; j++){
+            if(visited[j] == 0 && edges[i][j] >0){
+                traversal += i + " - " + j + "\t" + edges[i][j] + "\n";
+                DFS(j);
+            }
+        }
     }
 
     public Node [] getVertices(){
