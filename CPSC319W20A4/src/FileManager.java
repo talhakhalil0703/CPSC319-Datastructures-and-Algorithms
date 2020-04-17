@@ -3,10 +3,23 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+/**
+ * FileManager is a class that reads a file provided by the user as an argument in main, and it also creates the files
+ * @author Talha Khalil
+ * @since April 16, 2020
+ */
 public class FileManager {
 
+    /**
+     * The name of the file to be read, this is stored so that it can be later renamed to create files
+     */
     String fileName;
 
+    /**
+     * Creates the matrix by reading in the data file
+     * @param fileToRead location of the data file
+     * @return Matrix
+     */
     public Matrix readFile(String fileToRead) {
         try {
             fileName = fileToRead;
@@ -37,7 +50,7 @@ public class FileManager {
                 for (int i = 0; i < sizeOfSubsections * sizeOfSubsections; i++) {
                     values[i] = scan.nextInt();
                 }
-                vertices[index] = new Node(index, sizeOfSubsections, values);
+                vertices[index] = new Node(sizeOfSubsections, values);
             }
 
             return new Matrix(sizeOfSubsections, numberOfVertices, vertices);
@@ -49,6 +62,10 @@ public class FileManager {
         return null;
     }
 
+    /**
+     * Creates files based on matrix
+     * @param data Matrix which provides the data the file needs to write
+     */
     public void writeToFile(Matrix data) {
         try {
 

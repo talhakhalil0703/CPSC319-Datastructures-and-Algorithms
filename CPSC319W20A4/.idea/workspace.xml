@@ -26,6 +26,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CPSC319W20A3" />
   </component>
   <component name="RunManager">
     <configuration name="CPSC319W20A4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -64,37 +65,49 @@
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
     <state x="2853" y="-653" key="#com.intellij.ide.util.MemberChooser/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587115527832" />
-    <state width="1864" height="407" key="GridCell.Tab.0.bottom" timestamp="1587115965067">
+    <state x="2571" y="-394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1587146046152">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1864" height="407" key="GridCell.Tab.0.bottom/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587115965067" />
-    <state width="1864" height="407" key="GridCell.Tab.0.center" timestamp="1587115965067">
+    <state x="2571" y="-394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587146046152" />
+    <state x="2886" y="-441" key="FileChooserDialogImpl" timestamp="1587146010414">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1864" height="407" key="GridCell.Tab.0.center/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587115965067" />
-    <state width="1864" height="407" key="GridCell.Tab.0.left" timestamp="1587115965067">
+    <state x="2886" y="-441" key="FileChooserDialogImpl/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587146010414" />
+    <state width="1493" height="407" key="GridCell.Tab.0.bottom" timestamp="1587146046257">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1864" height="407" key="GridCell.Tab.0.left/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587115965067" />
-    <state width="1864" height="407" key="GridCell.Tab.0.right" timestamp="1587115965067">
+    <state width="1493" height="407" key="GridCell.Tab.0.bottom/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587146046257" />
+    <state width="1493" height="407" key="GridCell.Tab.0.center" timestamp="1587146046257">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1864" height="407" key="GridCell.Tab.0.right/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587115965067" />
-    <state width="1862" height="349" key="GridCell.Tab.1.bottom" timestamp="1587097854092">
+    <state width="1493" height="407" key="GridCell.Tab.0.center/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587146046257" />
+    <state width="1493" height="407" key="GridCell.Tab.0.left" timestamp="1587146046256">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1862" height="349" key="GridCell.Tab.1.bottom/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587097854092" />
-    <state width="1862" height="349" key="GridCell.Tab.1.center" timestamp="1587097854092">
+    <state width="1493" height="407" key="GridCell.Tab.0.left/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587146046256" />
+    <state width="1493" height="407" key="GridCell.Tab.0.right" timestamp="1587146046257">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1862" height="349" key="GridCell.Tab.1.center/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587097854092" />
-    <state width="1862" height="349" key="GridCell.Tab.1.left" timestamp="1587097854092">
+    <state width="1493" height="407" key="GridCell.Tab.0.right/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587146046257" />
+    <state width="1862" height="349" key="GridCell.Tab.1.bottom" timestamp="1587116426350">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1862" height="349" key="GridCell.Tab.1.left/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587097854092" />
-    <state width="1862" height="349" key="GridCell.Tab.1.right" timestamp="1587097854092">
+    <state width="1862" height="349" key="GridCell.Tab.1.bottom/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587116426350" />
+    <state width="1862" height="349" key="GridCell.Tab.1.center" timestamp="1587116426350">
       <screen x="1920" y="-1045" width="3072" height="1704" />
     </state>
-    <state width="1862" height="349" key="GridCell.Tab.1.right/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587097854092" />
+    <state width="1862" height="349" key="GridCell.Tab.1.center/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587116426350" />
+    <state width="1862" height="349" key="GridCell.Tab.1.left" timestamp="1587116426350">
+      <screen x="1920" y="-1045" width="3072" height="1704" />
+    </state>
+    <state width="1862" height="349" key="GridCell.Tab.1.left/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587116426350" />
+    <state width="1862" height="349" key="GridCell.Tab.1.right" timestamp="1587116426350">
+      <screen x="1920" y="-1045" width="3072" height="1704" />
+    </state>
+    <state width="1862" height="349" key="GridCell.Tab.1.right/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587116426350" />
+    <state x="2470" y="-523" width="672" height="678" key="search.everywhere.popup" timestamp="1587145268751">
+      <screen x="1920" y="-1045" width="3072" height="1704" />
+    </state>
+    <state x="2470" y="-523" width="672" height="678" key="search.everywhere.popup/1920.-1045.3072.1704/0.30.1920.1050@1920.-1045.3072.1704" timestamp="1587145268751" />
   </component>
 </project>
